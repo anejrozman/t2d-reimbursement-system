@@ -7,10 +7,6 @@ app = FastAPI()
 def health():
     return {"status": "ok"}
 
-@app.get("/test") # TODO: Remove this endpoint after testing
-def test():
-    return fhir_client.get("Patient/131287982")
-
 @app.get("/patients/diabetic")
 def get_diabetic_patients():
     bundle = fhir_client.get("Condition?code=44054006&_count=50")
