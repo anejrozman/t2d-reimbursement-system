@@ -30,6 +30,5 @@ cd t2d-reimbursement-system
 uv sync
 
 # Run the application
-cd app
-uv run python main.py
+uv run uvicorn app/main:app --reload
 ```
