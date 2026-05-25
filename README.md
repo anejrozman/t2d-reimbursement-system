@@ -40,5 +40,5 @@ The interactive API docs are available at `http://localhost:8000/docs` once the 
 ### Limitations
 
 - **No error handling:** FHIR server failures (network errors, 4xx/5xx responses) propagate as unhandled exceptions and return a generic 500 to the caller. Production use would require proper `HTTPException` mapping.
-- **Tariff point value is a placeholder:** `TARIFF_POINT_VALUE_CHF = 0.90` is a cantonal average estimate, not an officially sourced rate.
+- **Tariff point value and TARDOC_CATALOG in tardoc_rules.py:** The tariff point value is hardcoded to 0.9 for demonstration purposes, and the TARDOC_CATALOG is a simplified subset of the actual catalog. A real implementation would need to fetch these dynamically from `https://oaat-otma.ch/tardoc/tarifbrowser`.
 - **Public FHIR server:** The service targets `https://hapi.fhir.org/baseR4`, a shared public test server with no guarantees of uptime or data consistency.
