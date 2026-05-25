@@ -26,9 +26,19 @@ winget install --id=astral-sh.uv -e
 git clone <repo-url>
 cd t2d-reimbursement-system
 
-# Install all dependencies
+# Install all dependencies (add --group dev for linting)
 uv sync
 
 # Run the application
-uv run uvicorn app/main:app --reload
+uv run uvicorn app.main:app --reload
 ```
+
+The interactive API docs are available at `http://localhost:8000/docs` once the server is running.
+
+---
+
+### Limitations
+
+- **No error handling:** FHIR server failures (network errors, 4xx/5xx responses) propagate as unhandled exceptions and return a generic 500 to the caller. Production use would require proper `HTTPException` mapping.
+- **Tariff point value is a placeholder:** `TARIFF_POINT_VALUE_CHF = 0.90` is a cantonal average estimate, not an officially sourced rate.
+- **Public FHIR server:** The service targets `https://hapi.fhir.org/baseR4`, a shared public test server with no guarantees of uptime or data consistency.
