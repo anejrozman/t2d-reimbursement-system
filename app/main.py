@@ -62,12 +62,12 @@ async def health() -> dict[str, str]:
 
 
 @app.get(
-    "/patients/diabetic/count={count}",
+    "/patients/diabetic",
     response_model=list[PatientSummary],
     summary="List diabetic patients",
     tags=["patients"],
 )
-async def get_diabetic_patients(client: FHIRClient, count: int) -> list[PatientSummary]:
+async def get_diabetic_patients(client: FHIRClient, count: int = 50) -> list[PatientSummary]:
     """
     Query the FHIR server for patients with a Type 2 Diabetes condition
     (SNOMED CT code 44054006) and return their demographic summaries.
