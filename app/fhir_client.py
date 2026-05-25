@@ -23,6 +23,21 @@ def get(resource_path: str) -> dict:
     response.raise_for_status()
     return response.json()
 
+def post(resource_path: str, body: dict) -> dict:
+    """POST a FHIR resource and return the server's response."""
+    url = f"{BASE_URL}/{resource_path.lstrip('/')}"
+    response = httpx.post(
+        url,
+        json=body,
+        headers={
+            "Content-Type": "application/fhir+json",
+            "Accept": "application/fhir+json",
+        },
+        timeout=10.0,
+    )
+    response.raise_for_status()
+    return response.json()
+
 def extract_patient_ids(bundle: dict) -> list:
     """
     Extracts patient IDs from a FHIR Bundle of Condition resources.
